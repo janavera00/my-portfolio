@@ -15,14 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, 'home']);
+Route::controller([UserController::class])->group(function () {
+    Route::get('/', 'home');
 
-Route::get('/login', [UserController::class, 'index']);
-Route::post('/login/authenticate', [UserController::class, 'authenticate']);
-Route::get('/logout', [UserController::class, 'destroy']);
-Route::post('/editAbout', [UserController::class, 'editAboutMe']);
-Route::post('/updateSkills', [UserController::class, 'updateSkills']);
-Route::post('/updateEduc', [UserController::class, 'updateEduc']);
-Route::post('/updateExperience', [UserController::class, 'updateExperience']);
+    Route::get('/login', 'index');
+    Route::post('/login/authenticate', 'authenticate');
+    Route::get('/logout', 'destroy');
+    Route::post('/editAbout', 'editAboutMe');
+    Route::post('/updateSkills', 'updateSkills');
+    Route::post('/updateEduc', 'updateEduc');
+    Route::post('/updateExperience', 'updateExperience');
+});
 
 Route::post('/addWork', [WorkController::class, 'create']);
